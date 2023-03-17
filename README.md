@@ -4,6 +4,7 @@ This is the backend code for the React Face Recogniser App. It uses mysql databa
 Database used = mysql
 
 There are two tables in database: users & login
+
  desc users;
 +---------+-----------------+------+-----+---------+----------------+
 | Field   | Type            | Null | Key | Default | Extra          |
