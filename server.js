@@ -4,7 +4,7 @@ const cors = require("cors");
 const { handleRegister } = require("./controllers/register");
 const { handleSignin } = require("./controllers/signin");
 const { handleGetProfile } = require("./controllers/profile");
-const { handlePutImage } = require("./controllers/image");
+const { handlePutImage, handleAPICall } = require("./controllers/image");
 require("dotenv").config();
 
 const port = 5000
@@ -31,6 +31,8 @@ app.post("/register", (req, res) => handleRegister(req, res, knex, bcrypt));
 app.get("/profile/:id", (req, res) => handleGetProfile(req, res, knex));
 
 app.put("/image", (req, res) => handlePutImage(req, res, knex));
+
+app.post("/imageurl", (req, res) => handleAPICall(req, res));
 
 app.listen(port, (err) => {
   console.log(`Connected to Face-Recogniser-API. \nListening to port ${port}`)

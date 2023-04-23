@@ -1,3 +1,17 @@
+const Clarifai = require('clarifai')
+require("dotenv").config();
+
+//You must add your own API key here from Clarifai.
+const app = new Clarifai.App({
+  apiKey: process.env.CLARIFAI_API_KEY
+ });
+
+ const handleAPICall = (req, res) => {
+ app.models.predict("face-detection", req.body.input)
+ .then(data => {res.json(data)})
+ .catch(err => res.status(400).json('Unable to work with API'))
+ }
+
 const handlePutImage = (req, res, knex) => {
   const { id } = req.body;
   knex("users")
@@ -13,4 +27,4 @@ const handlePutImage = (req, res, knex) => {
     .catch((err) => res.status(400).json("Unable to get entries"));
 };
 
-module.exports = { handlePutImage };
+module.exports = { handlePutImage, handleAPICall };

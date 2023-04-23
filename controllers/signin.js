@@ -1,5 +1,8 @@
 const handleSignin = (req, res, knex, bcrypt) => {
     const { email, password } = req.body;
+    if(!email || !password) {
+      return res.status(400).json('Invalid Credentials')
+    }
     knex
       .select("email", "hash")
       .from("login")
