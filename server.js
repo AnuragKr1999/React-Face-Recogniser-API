@@ -7,16 +7,16 @@ const { handleGetProfile } = require("./controllers/profile");
 const { handlePutImage, handleAPICall } = require("./controllers/image");
 require("dotenv").config();
 
-const port = 5000
-
+// destructuring the environment variables
+const {DATABASE_URL, DATABASE_PORT, DATABASE_USER,DATABASE_PASSWORD, DATABASE_NAME, SERVER_PORT} = process.env
 const knex = require("knex")({
   client: "mysql",
   connection: {
-    host: "127.0.0.1",
-    port: process.env.DATABASE_PORT,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
+    host: DATABASE_URL,
+    port: DATABASE_PORT,
+    user: DATABASE_USER,
+    password: DATABASE_PASSWORD,
+    database: DATABASE_NAME,
   },
 });
 
@@ -34,7 +34,9 @@ app.put("/image", (req, res) => handlePutImage(req, res, knex));
 
 app.post("/imageurl", (req, res) => handleAPICall(req, res));
 
-app.listen(port, (err) => {
-  console.log(`Connected to Face-Recogniser-API. \nListening to port ${port}`)
+
+const PORT = process.env.PORT || 5000
+app.listen(PORT, (err) => {
+  console.log(`Connected to Face-Recogniser-API. \nListening to port ${PORT}`)
   if (err) console.log(err);
 });
