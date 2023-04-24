@@ -9,14 +9,15 @@ require("dotenv").config();
 
 // destructuring the environment variables
 const {DATABASE_URL, DATABASE_PORT, DATABASE_USER,DATABASE_PASSWORD, DATABASE_NAME, SERVER_PORT} = process.env
+
 const knex = require("knex")({
   client: "mysql",
   connection: {
     host: DATABASE_URL,
-    port: DATABASE_PORT,
-    user: DATABASE_USER,
-    password: DATABASE_PASSWORD,
-    database: DATABASE_NAME,
+    // port: DATABASE_PORT,
+    // user: DATABASE_USER,
+    // password: DATABASE_PASSWORD,
+    // database: DATABASE_NAME,
   },
 });
 
